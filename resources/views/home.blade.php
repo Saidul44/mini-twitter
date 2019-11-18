@@ -1,132 +1,12 @@
 @extends('layouts.app')
 
 @section('style')
-<style>
-ul {
-    padding: 0px;
-}
-a {
-    color:#000;
-}
-a:hover{
-    text-decoration: none;
-}
-.about_details h5{
-    margin: 15px 0 0 0;
-}.about_details p{
-    text-align: justify;
-}
 
-.nav-li {
-    padding: 5px 10px !important;
-}
-
-.tab-content-custom {
-    padding: 25px 15px !important;
-}
-
-.focusedInput {
-    border-color: rgba(82,168,236,.8);
-    outline: 0;
-    outline: thin dotted \9;
-    -moz-box-shadow: 0 0 8px rgba(82,168,236,.6);
-    box-shadow: 0 0 8px rgba(82,168,236,.6) !important;
-}
-
-.well {
-    padding: 0px !important;
-}
-.well-lg {
-    padding: 6px !important;
-}
-#login { display: none; }
-.login,
-.logout { 
-    position: absolute; 
-    top: -3px;
-    right: 0;
-}
-.page-header { position: relative; }
-.reviews {
-    color: #555;    
-    font-weight: bold;
-    margin: 8px auto 5px;
-}
-.notes {
-    color: #999;
-    font-size: 12px;
-}
-.media .media-object { width: 50px; }
-.media-body { position: relative; width: 100% !important;}
-.media-date { 
-    position: absolute; 
-    right: 25px;
-    top: 8px;
-}
-.media-date li { padding: 0; }
-.media-date li:first-child:before { content: ''; }
-.media-date li:before { 
-    content: '.'; 
-    margin-left: -2px; 
-    margin-right: 2px;
-}
-.media-comment { margin-bottom: 5px; }
-.media-replied { margin: 0 0 20px 50px; }
-.media-replied .media-heading { padding-left: 6px; }
-
-.btn-circle {
-    font-weight: bold;
-    font-size: 12px;
-    padding: 6px 15px;
-    border-radius: 20px;
-}
-.btn-circle span { padding-right: 6px; }
-.embed-responsive { margin-bottom: 20px; }
-.tab-content {
-    padding: 50px 15px;
-    border: 1px solid #ddd;
-    border-top: 0;
-    border-bottom-right-radius: 4px;
-    border-bottom-left-radius: 4px;
-}
-.custom-input-file {
-    overflow: hidden;
-    position: relative;
-    width: 120px;
-    height: 120px;
-    background: #eee url('https://s3.amazonaws.com/uifaces/faces/twitter/walterstephanie/128.jpg');    
-    background-size: 120px;
-    border-radius: 120px;
-}
-input[type="file"]{
-    z-index: 999;
-    line-height: 0;
-    font-size: 0;
-    position: absolute;
-    opacity: 0;
-    filter: alpha(opacity = 0);-ms-filter: "alpha(opacity=0)";
-    margin: 0;
-    padding:0;
-    left:0;
-}
-.uploadPhoto {
-    position: absolute;
-    top: 25%;
-    left: 25%;
-    display: none;
-    width: 50%;
-    height: 50%;
-    color: #fff;    
-    text-align: center;
-    line-height: 60px;
-    text-transform: uppercase;    
-    background-color: rgba(0,0,0,.3);
-    border-radius: 50px;
-    cursor: pointer;
-}
-.custom-input-file:hover .uploadPhoto { display: block; }
-
-</style>
+    <style>
+        ul {
+            padding: 0;
+        }
+    </style>
 
 @endsection
 
@@ -170,7 +50,7 @@ input[type="file"]{
                     
                     <div class="row mt-3 text-muted">
                         <div class="col-md-3">
-                            <i class="fa fa-comment-o" onclick="clickComment('{{ $post->id }}')"></i>&nbsp; 4
+                            <i class="fa fa-comment-o" onclick="clickComment('{{ $post->id }}')"></i>&nbsp; {{ $post->comments->count() }}
                         </div>
                         <div class="col-md-3">
                             <i class="fa fa-refresh"></i>&nbsp; 5

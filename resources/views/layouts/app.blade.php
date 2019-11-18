@@ -34,35 +34,36 @@
 <body>
     <div id="app">
         
-        @guest
+        @if(Auth::guest() && ( \Request::is('login') || \Request::is('register'))) 
 
-            @include('layouts.partials.nav.left_nav')
+            @include('layouts.partials.nav.top_nav')
 
-        @endguest
+            <main class="py-4">
+                @yield('content')
+            </main>
 
-        <div class="container-fluid">
-            <div class="row">
+        @else
+
+            <div class="container-fluid">
+                <div class="row">
 
 
-                <div class="col-md-3">
+                    <div class="col-md-3">
 
-                    @include('layouts.partials.nav.left_nav')
+                        @include('layouts.partials.nav.left_nav')
+
+                    </div>
+                
+                    <div class="col-md-9">
+
+                        @yield('content')
+
+                    </div>
 
                 </div>
-            
-                <div class="col-md-9">
-
-                    @yield('content')
-
-                </div>
-
             </div>
-        </div>
+        @endif
 
-
-        {{-- <main class="py-4">
-            @yield('content')
-        </main> --}}
     </div>
 
     @yield('script')
