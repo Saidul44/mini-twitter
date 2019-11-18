@@ -6,7 +6,12 @@
   <a class="nav-link" href="#"><i class="fa fa-envelope-o"></i>&nbsp; Messages</a>
   <a class="nav-link" href="#"><i class="fa fa-bookmark-o"></i>&nbsp; Bookmarks</a>
   <a class="nav-link" href="#"><i class="fa fa-list"></i>&nbsp; List</a>
-  <a class="nav-link" href="#"><i class="fa fa-user-o"></i>&nbsp; Profile</a>
+
+  @php( $imageUrl = "user_images/" . Auth::user()->profile_photo )
+
+  <a class="nav-link" href="{{ Auth::user()->username }}">
+    <img src='{{ asset("$imageUrl") }}' width="25px" height="25px" alt="..." class="rounded-circle">&nbsp; Profile
+  </a>
   <a class="nav-link" href="{{ route('logout') }}"
         onclick="event.preventDefault();
                         document.getElementById('logout-form').submit();">

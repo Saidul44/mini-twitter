@@ -24,3 +24,5 @@ Route::resource('posts', 'Post\PostController');
 
 Route::resource('comments', 'Comment\CommentController');
 
+Route::get('/{username?}', 'Profile\ProfileController@index');
+
