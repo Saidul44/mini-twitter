@@ -47,7 +47,7 @@
         var auth_check = 0;
         @endif
 
-        $(document).on('keyup', "input[type='text']",function () {
+        $(document).on('keyup', ".input_key",function () {
             var input_id = $(this).prop('id');
             if(input_id != 'search_input') {
                 if(! auth_check) {
@@ -67,6 +67,27 @@
                 }
             }
         });
+
+        // $(document).on('keyup', "input[type='text']",function () {
+        //     var input_id = $(this).prop('id');
+        //     if(input_id != 'search_input') {
+        //         if(! auth_check) {
+        //         $(this).val('');
+        //         swal({
+        //             title: "Warning!",
+        //             text: 'You must have to login first to comment or reply',
+        //             type: "warning",
+        //             showCancelButton: true,
+        //             confirmButtonColor: "#DD6B55",
+        //             confirmButtonText: 'Login',
+        //             closeOnConfirm: false
+        //         },
+        //         function(){
+        //             window.location.href = login_url;
+        //         });
+        //         }
+        //     }
+        // });
 
         @if(! Auth::check())
             $(function() {

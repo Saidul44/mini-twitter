@@ -22,8 +22,8 @@
             @endif
             
             <div class="row mt-3 text-muted">
-                <div class="col-md-3">
-                    <i class="fa fa-comment-o" onclick="clickComment('{{ $post->id }}')"></i>&nbsp; {{ $post->comments->count() }}
+                <div class="col-md-3" onclick="clickComment('{{ $post->id }}')">
+                    <i class="fa fa-comment-o"></i>&nbsp; {{ $post->comments->count() }}
                 </div>
                 <div class="col-md-3">
                     <i class="fa fa-refresh"></i>&nbsp; 5
