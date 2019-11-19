@@ -1,5 +1,4 @@
 
-
     <script>
         $(function() {
             $('#post_form').submit(function(e) {
@@ -32,7 +31,11 @@
         });
 
         
-        @php( $imageUrl = "user_images/" . Auth::user()->profile_photo )
+        @if(Auth::check())
+            @php( $imageUrl = "user_images/" . Auth::user()->profile_photo )
+        @else
+            @php( $imageUrl = "user_images/user-photo.png")
+        @endif
 
         var user_img = '{{ asset("$imageUrl") }}';
         var login_url = "{{ url('login') }}";
@@ -45,25 +48,44 @@
         @endif
 
         $(document).on('keyup', "input[type='text']",function () {
-        var input_id = $(this).prop('id');
-        if(input_id != 'search_input') {
-            if(! auth_check) {
-            $(this).val('');
-            swal({
-                title: "Warning!",
-                text: 'You must have to login first to comment ot reply',
-                type: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#DD6B55",
-                confirmButtonText: 'Login',
-                closeOnConfirm: false
-            },
-            function(){
-                window.location.href = login_url;
-            });
+            var input_id = $(this).prop('id');
+            if(input_id != 'search_input') {
+                if(! auth_check) {
+                $(this).val('');
+                swal({
+                    title: "Warning!",
+                    text: 'You must have to login first to comment or reply',
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: 'Login',
+                    closeOnConfirm: false
+                },
+                function(){
+                    window.location.href = login_url;
+                });
+                }
             }
-        }
         });
+
+        @if(! Auth::check())
+            $(function() {
+                $('#tweet-btn').click(function() {
+                    swal({
+                        title: "Warning!",
+                        text: 'You must have to login first to post',
+                        type: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: 'Login',
+                        closeOnConfirm: false
+                    },
+                    function(){
+                        window.location.href = login_url;
+                    });
+                });
+            });
+        @endif
 
         function edit_comment(e, comment_id) {
         e.preventDefault();
@@ -475,5 +497,3 @@
         });
         
     </script>
-
-

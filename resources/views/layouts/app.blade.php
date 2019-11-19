@@ -13,6 +13,7 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="{{ asset('/js/jasny-bootstrap.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('/js/sweetalert.min.js') }}" type="text/javascript"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -24,6 +25,8 @@
 
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <link href="{{ asset('/css/sweetalert.css') }}" rel="stylesheet" type="text/css" />
 
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
@@ -43,33 +46,27 @@
             </main>
 
         @else
-
             <div class="container-fluid">
                 <div class="row">
-
-
                     <div class="col-md-3">
-
                         @include('layouts.partials.nav.left_nav')
-
                     </div>
-                
                     <div class="col-md-9">
-
                         @yield('content')
-
                     </div>
-
                 </div>
             </div>
         @endif
-
     </div>
 
-    @include('common_layout.post_modal')
+    @if(Auth::check())
+        @include('common_layout.post_modal')
+    @endif
+
+    @include('common_layout.post_comment_function')
 
     @yield('script')
 
-    @include('common_layout.post_comment_function')
+
 </body>
 </html>

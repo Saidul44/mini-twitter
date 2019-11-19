@@ -15,20 +15,23 @@ class PostController extends Controller
     
     public function index()
     {
-        $posts = Post::with(['user', 'comments.user'])->orderBy('id', 'desc')->get();
-
-        $unfollowingUsers = unfollowingUserList();
-
-        return view('home', get_defined_vars());
+        
     }
 
     public function store(Request $request)
     {
 
+        logger($request->all());
+
         $this->validate($request, [
-            'post_content' => 'required',
-            'file' => 'required|image'
+            'post_content' => ['required'],
         ]);
+
+        if($request->hasFile('file')) {
+            $this->validate($request, [
+                'file' => 'image|max:50000'
+            ]);    
+        }
 
         $post = Post::create([
                             'user_id' => Auth::id(),

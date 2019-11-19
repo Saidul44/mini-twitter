@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Post;
+use App\User;
 
 class HomeController extends Controller
 {
@@ -13,7 +15,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        // $this->middleware('auth');
     }
 
     /**
@@ -23,6 +25,16 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $userCount = User::count();
+        
+        if($userCount == 0) {
+            return redirect('register');
+        }
+
+        $posts = Post::with(['user', 'comments.user'])->orderBy('id', 'desc')->get();
+
+        $unfollowingUsers = unfollowingUserList();
+
+        return view('home', get_defined_vars());
     }
 }

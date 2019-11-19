@@ -19,7 +19,7 @@
         <div class="row post-border-bottom">
             <div class="col-md-8">
                 <div class="content-header">
-                    <h5 class="content-header-text"><a href="{{ url('home') }}"><i class="fa fa-arrow-left"></i></a>&nbsp;&nbsp; {{ $user->name }}</h5>
+                    <h5 class="content-header-text"><a href="{{ url('/') }}"><i class="fa fa-arrow-left"></i></a>&nbsp;&nbsp; {{ $user->name }}</h5>
                 </div>
             </div>
         </div>

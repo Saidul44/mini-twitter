@@ -15,7 +15,7 @@
         <div class="row post-border-bottom">
             <div class="col-md-8">
                 <div class="content-header">
-                    <h5 class="content-header-text"><a href="{{ url('home') }}"><i class="fa fa-arrow-left"></i></a>&nbsp;&nbsp; {{ $user->name }}</h5>
+                    <h5 class="content-header-text"><a href="{{ url('/') }}"><i class="fa fa-arrow-left"></i></a>&nbsp;&nbsp; {{ $user->name }}</h5>
                 </div>
             </div>
         </div>
@@ -51,7 +51,7 @@
             </div>
         </div>
 
-        <h5 class="text-primary"><a href="{{ url(Auth::user()->username) }}" style="text-decoration: underline;">Tweets</a></h5>
+        <h5 class="text-primary"><a href="{{ url($user->username) }}" style="text-decoration: underline;">Tweets</a></h5>
 
         @include('common_layout.post_layout', ['posts' => $posts])
         

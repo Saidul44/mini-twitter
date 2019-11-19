@@ -11,22 +11,29 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Auth::routes();
 
-// Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/home', 'Post\PostController@index');
+Route::get('/', 'HomeController@index');
 
-Route::resource('posts', 'Post\PostController');
+Route::group(['middleware' => ['web', 'auth']], function () {
 
-Route::resource('comments', 'Comment\CommentController');
+    Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/follow/{userId}', 'Profile\ProfileController@follow');
+    Route::resource('posts', 'Post\PostController');
+    
+    Route::resource('comments', 'Comment\CommentController');
 
-Route::get('/unfollow/{userId}', 'Profile\ProfileController@unfollow');
+    Route::get('/follow/{userId}', 'Profile\ProfileController@follow');
+    
+    Route::get('/unfollow/{userId}', 'Profile\ProfileController@unfollow');
+
+    Route::get('/settings', 'Setting\SettingController@index');
+
+    Route::post('/settings', 'Setting\SettingController@store');
+
+});
+
 
 Route::get('/{username}/following', 'Profile\ProfileController@following')->name('following');
 
