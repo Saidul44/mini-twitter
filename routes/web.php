@@ -24,5 +24,13 @@ Route::resource('posts', 'Post\PostController');
 
 Route::resource('comments', 'Comment\CommentController');
 
-Route::get('/{username?}', 'Profile\ProfileController@index');
+Route::get('/follow/{userId}', 'Profile\ProfileController@follow');
+
+Route::get('/unfollow/{userId}', 'Profile\ProfileController@unfollow');
+
+Route::get('/{username}/following', 'Profile\ProfileController@following')->name('following');
+
+Route::get('/{username}/followers', 'Profile\ProfileController@followers')->name('followers');
+
+Route::get('/{username}', 'Profile\ProfileController@index');
 

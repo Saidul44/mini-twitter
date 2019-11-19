@@ -9,7 +9,7 @@
 
   @php( $imageUrl = "user_images/" . Auth::user()->profile_photo )
 
-  <a class="nav-link" href="{{ Auth::user()->username }}">
+  <a class="nav-link" href="{{ url(Auth::user()->username) }}">
     <img src='{{ asset("$imageUrl") }}' width="25px" height="25px" alt="..." class="rounded-circle">&nbsp; Profile
   </a>
   <a class="nav-link" href="{{ route('logout') }}"

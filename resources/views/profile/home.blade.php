@@ -26,13 +26,32 @@
 
         <div class="row mt-3">
             <div class="col-md-12">
-                @php( $imageUrl = "user_images/" . Auth::user()->profile_photo )
-                <img src='{{ asset("$imageUrl") }}' width="150px" height="150px" alt="..." class="rounded-circle">
-                <h5 class="mt-1 ml-4">{{ Auth::user()->name }}</h5>
-                <h5 class="text-muted mt-1 ml-4">{{ '@' . Auth::user()->username }}</h5>
-                <p class="text-muted mt-1 ml-4"><i class="fa fa-calendar"></i> Joined {{ date('F Y', strtotime(Auth::user()->created_at)) }}</p>
 
-                <p class="mt-1 ml-4"><b>100</b> <a href="#" class="text-muted">Following</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>50</b> <a href="#" class="text-muted">Followers</a></p>
+                @if($user->profile_photo)
+                    @php( $imageUrl = "user_images/" . $user->profile_photo )
+                    <img src='{{ asset("$imageUrl") }}' width="130px" height="130px" alt="..." class="rounded-circle">
+                @else
+                    <img src='{{ asset("img/user-photo.png" ) }}' width="130px" height="130px" alt="..." class="rounded-circle">
+                @endif
+
+                <h5 class="mt-1 ml-4">{{ $user->name }}</h5>
+                <h5 class="text-muted mt-1 ml-4">{{ '@' . $user->username }}</h5>
+                <p class="text-muted mt-1 ml-4"><i class="fa fa-calendar"></i> Joined {{ date('F Y', strtotime($user->created_at)) }}</p>
+                @if(Auth::check() && (Auth::id() != $user->id))
+                    <p style="float: right;">
+                        @if(followingCheck(Auth::id(), $user->id))
+                            @php( $unfollowUrl = "unfollow/" . $user->id )
+                            <a href='{{ url($unfollowUrl) }}' class="btn btn-primary following-btn" style="border-radius: 23px;">Following</a>
+                        @else 
+                            @php( $followingUrl = "follow/" . $user->id )
+                            <a href="{{ url($followingUrl) }}" class="btn btn-outline-primary" style="border-radius: 23px;">Follow</a>
+                        @endif
+                    </p>
+                @endif
+                <p class="mt-1 ml-4">
+                    <b>{{ $followingCount }}</b> <a href='{{ url("$user->username/following") }}' class="text-muted">Following</a> 
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>{{ $followersCount }}</b> <a href='{{ url("$user->username/followers") }}' class="text-muted">Followers</a>
+                </p>
             </div>
         </div>
 
@@ -688,6 +707,20 @@
         function clickComment(postId) {
             $('#post_comment_' + postId).toggle();
         }
+
+        $(function() {
+            $( ".following-btn" ).hover(function() {
+                $(this).text('Unfollow');
+                $( this ).removeClass( "btn-primary" );
+                $( this ).addClass( "btn-danger" );
+            });
+
+            $( ".following-btn" ).mouseleave(function() {
+                $(this).text('Following');
+                $( this ).removeClass( "btn-danger" );
+                $( this ).addClass( "btn-primary" );
+            });
+        });
         
     </script>
 

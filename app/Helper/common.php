@@ -34,5 +34,13 @@
                 
     }
 
+    function followingCheck($userId, $followingUserId) {
+        $following = \App\Models\UserFollowing::where('user_id', $userId)
+                                            ->where('following_user_id', $followingUserId)
+                                            ->first();
+
+        return $following ? true : false;
+    }   
+
 
 ?>
