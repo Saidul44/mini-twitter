@@ -1,6 +1,6 @@
 <nav class="nav flex-column ml-3">
-  <a class="nav-link" style="color: rgba(29,161,242,1.00)" href="#"><i class="fa fa-twitter" style="font-size: 1.5em;"></i></a>
-  <a class="nav-link active" href="#"><i class="fa fa-home"></i>&nbsp; Home</a>
+  <a class="nav-link" style="color: rgba(29,161,242,1.00)" href="{{ url('home') }}"><i class="fa fa-twitter" style="font-size: 1.5em;"></i></a>
+  <a class="nav-link active" href="{{ url('home') }}"><i class="fa fa-home"></i>&nbsp; Home</a>
   <a class="nav-link" href="#"><i class="fa fa-hashtag"></i>&nbsp; Explore</a>
   <a class="nav-link" href="#"><i class="fa fa-bell-o"></i>&nbsp; Notifications</a>
   <a class="nav-link" href="#"><i class="fa fa-envelope-o"></i>&nbsp; Messages</a>

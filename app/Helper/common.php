@@ -42,5 +42,22 @@
         return $following ? true : false;
     }   
 
+    function unfollowingUserList() {
+
+        if(Auth::check()) {
+
+            $followingList = \App\Models\UserFollowing::where('user_id', Auth::id())
+                                    ->pluck('following_user_id')
+                                    ->toArray();
+
+            return \App\User::whereNotIn('id', $followingList)
+                            ->where('id', '!=', Auth::id())
+                            ->get();
+            
+        }
+
+        return null;
+    }
+
 
 ?>

@@ -66,6 +66,10 @@
 
     </div>
 
+    @include('common_layout.post_modal')
+
     @yield('script')
+
+    @include('common_layout.post_comment_function')
 </body>
 </html>

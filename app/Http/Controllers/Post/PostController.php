@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Post;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Post;
+use App\Models\UserFollowing;
+use App\User;
 use Session;
 use Auth;
 
@@ -14,6 +16,8 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::with(['user', 'comments.user'])->orderBy('id', 'desc')->get();
+
+        $unfollowingUsers = unfollowingUserList();
 
         return view('home', get_defined_vars());
     }

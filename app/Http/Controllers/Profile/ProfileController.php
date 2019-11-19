@@ -34,6 +34,8 @@ class ProfileController extends Controller
         $followersCount = UserFollowing::where('following_user_id', $user->id)
                                     ->count();
 
+        $unfollowingUsers = unfollowingUserList();
+
         return view('profile.home', get_defined_vars());
 
     }
@@ -53,6 +55,8 @@ class ProfileController extends Controller
                                     ->orderBy('id', 'desc')
                                     ->get();
 
+        $unfollowingUsers = unfollowingUserList();
+
         return view('profile.following', get_defined_vars());
 
     }
@@ -70,6 +74,8 @@ class ProfileController extends Controller
                                     ->where('following_user_id', $user->id)
                                     ->orderBy('id', 'desc')
                                     ->get();
+                                    
+        $unfollowingUsers = unfollowingUserList();
 
         return view('profile.followers', get_defined_vars());
 
